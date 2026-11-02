@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://ce7kxkjmxuccp"]
+
+[ext_resource type="Script" uid="uid://bcgjveddfu8wv" path="res://Scripts/Player.cs" id="1_glv2v"]
+[ext_resource type="Texture2D" uid="uid://c6gvxmfe2qo3y" path="res://icon.svg" id="2_uu6xs"]
+[ext_resource type="Script" uid="uid://umfgdhd7grsh" path="res://Scripts/Target.cs" id="3_r0du0"]
+[ext_resource type="Script" uid="uid://bgx7xdef5wvm8" path="res://Scripts/Label.cs" id="4_cm0pq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kssaf"]
+size = Vector2(135, 130)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kssaf"]
+
+[node name="Main" type="Node2D" unique_id=867256760]
+
+[node name="Player" type="CharacterBody2D" parent="." unique_id=973050710]
+position = Vector2(556, 378)
+script = ExtResource("1_glv2v")
+
+[node name="Sprite2D" type="Sprite2D" parent="Player" unique_id=453300434]
+texture = ExtResource("2_uu6xs")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player" unique_id=1944136298]
+position = Vector2(-0.5, -3)
+shape = SubResource("RectangleShape2D_kssaf")
+
+[node name="Target" type="Area2D" parent="." unique_id=2006568775]
+position = Vector2(159, 198)
+script = ExtResource("3_r0du0")
+
+[node name="Sprite2D" type="Sprite2D" parent="Target" unique_id=1738429847]
+scale = Vector2(0.56, -0.76)
+texture = ExtResource("2_uu6xs")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Target" unique_id=786417211]
+scale = Vector2(11.28, 11.28)
+shape = SubResource("CircleShape2D_kssaf")
+
+[node name="Label" type="Label" parent="." unique_id=442682243]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Reach the Target"
+script = ExtResource("4_cm0pq")
+
+[connection signal="body_entered" from="Target" to="Target" method="_on_body_entered"]
